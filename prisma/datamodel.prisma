@@ -16,13 +16,3 @@ type Post {
   description: String!
   user: User!
 }
-
-type File {
-  id: ID! @id
-  createdAt: DateTime! @createdAt
-  updatedAt: DateTime! @updatedAt
-  filename: String!
-  mimetype: String!
-  encoding: String!
-  post: Post!
-}

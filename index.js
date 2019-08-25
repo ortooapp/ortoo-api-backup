@@ -9,16 +9,6 @@ const JWT_SECRET = "secret113";
 const typeDefs = gql`
   scalar DateTime
 
-  type File {
-    id: ID!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-    filename: String!
-    mimetype: String!
-    encoding: String!
-    post: Post
-  }
-
   type User {
     id: ID!
     createdAt: DateTime!
@@ -35,7 +25,6 @@ const typeDefs = gql`
     updatedAt: DateTime!
     published: Boolean!
     description: String!
-    objects: [Object!]!
     user: User
   }
 
@@ -56,7 +45,7 @@ const typeDefs = gql`
   type Mutation {
     signUp(email: String, password: String, name: String!): User
     signIn(email: String, password: String): LoginResponse
-    createDraft(description: String!, objects: [Upload!]!): Post
+    createDraft(description: String!): Post
     publishPost(postId: ID!): Post
   }
 `;
