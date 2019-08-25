@@ -20,7 +20,9 @@
   "homepage": "https://github.com/ortooapp/ortoo-api#readme",
   "dependencies": {
     "apollo-server-micro": "^2.9.0",
+    "bcryptjs": "^2.4.3",
     "graphql": "^14.5.3",
+    "jsonwebtoken": "^8.5.1",
     "micro": "^9.3.4",
     "micro-cors": "^0.1.1",
     "prisma-client-lib": "^1.34.6"

@@ -1,10 +1,18 @@
 const cors = require("micro-cors")();
 const { ApolloServer, gql } = require("apollo-server-micro");
 const { prisma } = require("./prisma/generated/prisma-client");
+const { hash, compare } = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+const JWT_SECRET = "secret113";
 
 const typeDefs = gql`
+  scalar DateTime
+
   type User {
     id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
     email: String
     password: String!
     name: String!
@@ -13,9 +21,16 @@ const typeDefs = gql`
 
   type Post {
     id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
     published: Boolean!
     description: String!
     author: User
+  }
+
+  type LoginResponse {
+    token: String!
+    user: User!
   }
 
   type Query {
@@ -27,6 +42,7 @@ const typeDefs = gql`
 
   type Mutation {
     signUp(email: String, password: String, name: String!): User
+    signIn(email: String, password: String): LoginResponse
     createDraft(description: String!, userId: ID!): Post
     publishPost(postId: ID!): Post
   }
@@ -42,12 +58,28 @@ const resolvers = {
     }
   },
   Mutation: {
-    signUp: (root, args, context) => {
+    signUp: async (root, args, context) => {
       return context.prisma.createUser({
         email: args.email,
-        password: args.password,
+        password: await hash(args.password, 10),
         name: args.name
       });
+    },
+    signIn: async (root, { email, password }, context) => {
+      const user = await context.prisma.user({ email });
+      if (!user) {
+        throw new Error(`User not found for email: ${email}`);
+      }
+
+      const passwordValid = await compare(password, user.password);
+      if (!passwordValid) {
+        throw new Error("Invalid password");
+      }
+
+      return {
+        token: jwt.sign({ foo: "bar" }, "shhhhh"),
+        user
+      };
     },
     createDraft: (root, args, context) => {
       return context.prisma.createPost({
