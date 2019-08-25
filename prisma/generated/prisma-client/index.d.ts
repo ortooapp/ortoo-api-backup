@@ -179,9 +179,9 @@ export type PostWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface PostUpdateWithWhereUniqueWithoutPostByUserInput {
+export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
   where: PostWhereUniqueInput;
-  data: PostUpdateWithoutPostByUserDataInput;
+  data: PostUpdateWithoutAuthorDataInput;
 }
 
 export interface UserCreateInput {
@@ -189,24 +189,22 @@ export interface UserCreateInput {
   email?: Maybe<String>;
   password: String;
   name: String;
-  posts?: Maybe<PostCreateManyWithoutPostByUserInput>;
+  posts?: Maybe<PostCreateManyWithoutAuthorInput>;
 }
 
-export interface PostUpdateManyWithoutPostByUserInput {
-  create?: Maybe<
-    PostCreateWithoutPostByUserInput[] | PostCreateWithoutPostByUserInput
-  >;
+export interface PostUpdateManyWithoutAuthorInput {
+  create?: Maybe<PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput>;
   delete?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
   connect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
   set?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
   disconnect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
   update?: Maybe<
-    | PostUpdateWithWhereUniqueWithoutPostByUserInput[]
-    | PostUpdateWithWhereUniqueWithoutPostByUserInput
+    | PostUpdateWithWhereUniqueWithoutAuthorInput[]
+    | PostUpdateWithWhereUniqueWithoutAuthorInput
   >;
   upsert?: Maybe<
-    | PostUpsertWithWhereUniqueWithoutPostByUserInput[]
-    | PostUpsertWithWhereUniqueWithoutPostByUserInput
+    | PostUpsertWithWhereUniqueWithoutAuthorInput[]
+    | PostUpsertWithWhereUniqueWithoutAuthorInput
   >;
   deleteMany?: Maybe<PostScalarWhereInput[] | PostScalarWhereInput>;
   updateMany?: Maybe<
@@ -315,7 +313,7 @@ export interface PostCreateInput {
   id?: Maybe<ID_Input>;
   published?: Maybe<Boolean>;
   description: String;
-  postByUser: UserCreateOneWithoutPostsInput;
+  author: UserCreateOneWithoutPostsInput;
 }
 
 export interface PostUpdateManyDataInput {
@@ -387,16 +385,16 @@ export interface UserCreateWithoutPostsInput {
   name: String;
 }
 
-export interface PostUpsertWithWhereUniqueWithoutPostByUserInput {
+export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
   where: PostWhereUniqueInput;
-  update: PostUpdateWithoutPostByUserDataInput;
-  create: PostCreateWithoutPostByUserInput;
+  update: PostUpdateWithoutAuthorDataInput;
+  create: PostCreateWithoutAuthorInput;
 }
 
 export interface PostUpdateInput {
   published?: Maybe<Boolean>;
   description?: Maybe<String>;
-  postByUser?: Maybe<UserUpdateOneRequiredWithoutPostsInput>;
+  author?: Maybe<UserUpdateOneRequiredWithoutPostsInput>;
 }
 
 export interface PostWhereInput {
@@ -446,7 +444,7 @@ export interface PostWhereInput {
   description_not_starts_with?: Maybe<String>;
   description_ends_with?: Maybe<String>;
   description_not_ends_with?: Maybe<String>;
-  postByUser?: Maybe<UserWhereInput>;
+  author?: Maybe<UserWhereInput>;
   AND?: Maybe<PostWhereInput[] | PostWhereInput>;
   OR?: Maybe<PostWhereInput[] | PostWhereInput>;
   NOT?: Maybe<PostWhereInput[] | PostWhereInput>;
@@ -456,7 +454,7 @@ export interface UserUpdateInput {
   email?: Maybe<String>;
   password?: Maybe<String>;
   name?: Maybe<String>;
-  posts?: Maybe<PostUpdateManyWithoutPostByUserInput>;
+  posts?: Maybe<PostUpdateManyWithoutAuthorInput>;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -465,10 +463,8 @@ export interface UserUpdateManyMutationInput {
   name?: Maybe<String>;
 }
 
-export interface PostCreateManyWithoutPostByUserInput {
-  create?: Maybe<
-    PostCreateWithoutPostByUserInput[] | PostCreateWithoutPostByUserInput
-  >;
+export interface PostCreateManyWithoutAuthorInput {
+  create?: Maybe<PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput>;
   connect?: Maybe<PostWhereUniqueInput[] | PostWhereUniqueInput>;
 }
 
@@ -477,7 +473,7 @@ export interface PostUpdateManyMutationInput {
   description?: Maybe<String>;
 }
 
-export interface PostCreateWithoutPostByUserInput {
+export interface PostCreateWithoutAuthorInput {
   id?: Maybe<ID_Input>;
   published?: Maybe<Boolean>;
   description: String;
@@ -505,7 +501,7 @@ export interface UserSubscriptionWhereInput {
   NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
 }
 
-export interface PostUpdateWithoutPostByUserDataInput {
+export interface PostUpdateWithoutAuthorDataInput {
   published?: Maybe<Boolean>;
   description?: Maybe<String>;
 }
@@ -592,7 +588,7 @@ export interface PostPromise extends Promise<Post>, Fragmentable {
   updatedAt: () => Promise<DateTimeOutput>;
   published: () => Promise<Boolean>;
   description: () => Promise<String>;
-  postByUser: <T = UserPromise>() => T;
+  author: <T = UserPromise>() => T;
 }
 
 export interface PostSubscription
@@ -603,7 +599,7 @@ export interface PostSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   published: () => Promise<AsyncIterator<Boolean>>;
   description: () => Promise<AsyncIterator<String>>;
-  postByUser: <T = UserSubscription>() => T;
+  author: <T = UserSubscription>() => T;
 }
 
 export interface PostNullablePromise
@@ -614,7 +610,7 @@ export interface PostNullablePromise
   updatedAt: () => Promise<DateTimeOutput>;
   published: () => Promise<Boolean>;
   description: () => Promise<String>;
-  postByUser: <T = UserPromise>() => T;
+  author: <T = UserPromise>() => T;
 }
 
 export interface AggregatePost {
