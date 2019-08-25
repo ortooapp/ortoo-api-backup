@@ -22,6 +22,7 @@ const typeDefs = gql`
     publishedPosts: [Post!]!
     post(postId: ID!): Post
     postsByUser(userId: ID!): [Post!]!
+    users: [User!]!
   }
 
   type Mutation {
@@ -35,6 +36,9 @@ const resolvers = {
   Query: {
     publishedPosts: (root, args, context) => {
       return context.prisma.posts({ where: { published: true } });
+    },
+    users: (root, args, context) => {
+      return context.prisma.users();
     }
   },
   Mutation: {
