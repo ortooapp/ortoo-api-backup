@@ -77,7 +77,7 @@ const resolvers = {
       }
 
       return {
-        token: jwt.sign({ foo: "bar" }, "shhhhh"),
+        token: jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: "1h" }),
         user
       };
     },
