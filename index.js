@@ -27,7 +27,7 @@ const typeDefs = gql`
 
   type Mutation {
     signUp(email: String, password: String, name: String!): User
-    createDraft(description: String!): Post
+    createDraft(description: String!, userId: ID!): Post
     publishPost(postId: ID!): Post
   }
 `;
