@@ -14,5 +14,5 @@ type Post {
   updatedAt: DateTime! @updatedAt
   published: Boolean! @default(value: false)
   description: String!
-  postByUser: User!
+  author: User!
 }
