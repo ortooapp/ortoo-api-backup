@@ -1,0 +1,27 @@
+{
+  "name": "ortoo-api",
+  "version": "1.0.0",
+  "description": "ortoo-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "micro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ortooapp/ortoo-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ortooapp/ortoo-api/issues"
+  },
+  "homepage": "https://github.com/ortooapp/ortoo-api#readme",
+  "dependencies": {
+    "apollo-server-micro": "^2.9.0",
+    "graphql": "^14.5.3",
+    "micro": "^9.3.4",
+    "micro-cors": "^0.1.1"
+  }
+}
