@@ -18,6 +18,9 @@ type Post {
 }
 
 type File {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   filename: String!
   mimetype: String!
   encoding: String!

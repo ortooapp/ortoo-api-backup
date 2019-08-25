@@ -10,9 +10,13 @@ const typeDefs = gql`
   scalar DateTime
 
   type File {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
     filename: String!
     mimetype: String!
     encoding: String!
+    post: Post
   }
 
   type User {
