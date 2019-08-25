@@ -43,7 +43,7 @@ const typeDefs = gql`
   type Mutation {
     signUp(email: String, password: String, name: String!): User
     signIn(email: String, password: String): LoginResponse
-    createDraft(description: String!, userId: ID!): Post
+    createDraft(description: String!): Post
     publishPost(postId: ID!): Post
   }
 `;
