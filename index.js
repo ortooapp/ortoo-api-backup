@@ -8,31 +8,6 @@ const JWT_SECRET = "secret113";
 
 const typeDefs = gql`
   scalar DateTime
-
-  type User {
-    id: ID!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-    email: String
-    password: String!
-    name: String!
-    posts: [Post!]!
-  }
-
-  type Post {
-    id: ID!
-    createdAt: DateTime!
-    updatedAt: DateTime!
-    published: Boolean!
-    description: String!
-    author: User
-  }
-
-  type LoginResponse {
-    token: String!
-    user: User!
-  }
-
   type Query {
     posts: [Post!]!
     draftedPosts: [Post!]!
@@ -47,6 +22,30 @@ const typeDefs = gql`
     signIn(email: String, password: String): LoginResponse
     createDraft(description: String!): Post
     publishPost(postId: ID!): Post
+  }
+
+  type User {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    email: String
+    password: String!
+    name: String!
+    posts: [Post!]!
+  }
+
+  type LoginResponse {
+    token: String!
+    user: User!
+  }
+
+  type Post {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    published: Boolean!
+    description: String!
+    author: User
   }
 `;
 
