@@ -25,7 +25,7 @@ const typeDefs = gql`
     updatedAt: DateTime!
     published: Boolean!
     description: String!
-    user: User
+    postByUser: User
   }
 
   type LoginResponse {
@@ -92,7 +92,7 @@ const resolvers = {
     createDraft: (root, args, { user, prisma }) => {
       return prisma.createPost({
         description: args.description,
-        user: {
+        postByUser: {
           connect: { id: user.id }
         }
       });
@@ -114,12 +114,12 @@ const resolvers = {
     }
   },
   Post: {
-    user: (root, args, context) => {
+    postByUser: (root, args, context) => {
       return context.prisma
         .post({
           id: root.id
         })
-        .user();
+        .postByUser();
     }
   }
 };

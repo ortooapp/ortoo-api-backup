@@ -57,7 +57,7 @@ type Post {
   updatedAt: DateTime!
   published: Boolean!
   description: String!
-  user: User!
+  postByUser: User!
 }
 
 type PostConnection {
@@ -70,15 +70,15 @@ input PostCreateInput {
   id: ID
   published: Boolean
   description: String!
-  user: UserCreateOneWithoutPostsInput!
+  postByUser: UserCreateOneWithoutPostsInput!
 }
 
-input PostCreateManyWithoutUserInput {
-  create: [PostCreateWithoutUserInput!]
+input PostCreateManyWithoutPostByUserInput {
+  create: [PostCreateWithoutPostByUserInput!]
   connect: [PostWhereUniqueInput!]
 }
 
-input PostCreateWithoutUserInput {
+input PostCreateWithoutPostByUserInput {
   id: ID
   published: Boolean
   description: String!
@@ -183,7 +183,7 @@ input PostSubscriptionWhereInput {
 input PostUpdateInput {
   published: Boolean
   description: String
-  user: UserUpdateOneRequiredWithoutPostsInput
+  postByUser: UserUpdateOneRequiredWithoutPostsInput
 }
 
 input PostUpdateManyDataInput {
@@ -196,14 +196,14 @@ input PostUpdateManyMutationInput {
   description: String
 }
 
-input PostUpdateManyWithoutUserInput {
-  create: [PostCreateWithoutUserInput!]
+input PostUpdateManyWithoutPostByUserInput {
+  create: [PostCreateWithoutPostByUserInput!]
   delete: [PostWhereUniqueInput!]
   connect: [PostWhereUniqueInput!]
   set: [PostWhereUniqueInput!]
   disconnect: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutUserInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutUserInput!]
+  update: [PostUpdateWithWhereUniqueWithoutPostByUserInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutPostByUserInput!]
   deleteMany: [PostScalarWhereInput!]
   updateMany: [PostUpdateManyWithWhereNestedInput!]
 }
@@ -213,20 +213,20 @@ input PostUpdateManyWithWhereNestedInput {
   data: PostUpdateManyDataInput!
 }
 
-input PostUpdateWithoutUserDataInput {
+input PostUpdateWithoutPostByUserDataInput {
   published: Boolean
   description: String
 }
 
-input PostUpdateWithWhereUniqueWithoutUserInput {
+input PostUpdateWithWhereUniqueWithoutPostByUserInput {
   where: PostWhereUniqueInput!
-  data: PostUpdateWithoutUserDataInput!
+  data: PostUpdateWithoutPostByUserDataInput!
 }
 
-input PostUpsertWithWhereUniqueWithoutUserInput {
+input PostUpsertWithWhereUniqueWithoutPostByUserInput {
   where: PostWhereUniqueInput!
-  update: PostUpdateWithoutUserDataInput!
-  create: PostCreateWithoutUserInput!
+  update: PostUpdateWithoutPostByUserDataInput!
+  create: PostCreateWithoutPostByUserInput!
 }
 
 input PostWhereInput {
@@ -276,7 +276,7 @@ input PostWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  user: UserWhereInput
+  postByUser: UserWhereInput
   AND: [PostWhereInput!]
   OR: [PostWhereInput!]
   NOT: [PostWhereInput!]
@@ -322,7 +322,7 @@ input UserCreateInput {
   email: String
   password: String!
   name: String!
-  posts: PostCreateManyWithoutUserInput
+  posts: PostCreateManyWithoutPostByUserInput
 }
 
 input UserCreateOneWithoutPostsInput {
@@ -388,7 +388,7 @@ input UserUpdateInput {
   email: String
   password: String
   name: String
-  posts: PostUpdateManyWithoutUserInput
+  posts: PostUpdateManyWithoutPostByUserInput
 }
 
 input UserUpdateManyMutationInput {
