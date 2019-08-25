@@ -9,6 +9,12 @@ const JWT_SECRET = "secret113";
 const typeDefs = gql`
   scalar DateTime
 
+  type File {
+    filename: String!
+    mimetype: String!
+    encoding: String!
+  }
+
   type User {
     id: ID!
     createdAt: DateTime!
@@ -25,7 +31,8 @@ const typeDefs = gql`
     updatedAt: DateTime!
     published: Boolean!
     description: String!
-    author: User
+    objects: [Object!]!
+    user: User
   }
 
   type LoginResponse {
@@ -45,7 +52,7 @@ const typeDefs = gql`
   type Mutation {
     signUp(email: String, password: String, name: String!): User
     signIn(email: String, password: String): LoginResponse
-    createDraft(description: String!): Post
+    createDraft(description: String!, objects: [Upload!]!): Post
     publishPost(postId: ID!): Post
   }
 `;
@@ -92,7 +99,7 @@ const resolvers = {
     createDraft: (root, args, { user, prisma }) => {
       return prisma.createPost({
         description: args.description,
-        author: {
+        user: {
           connect: { id: user.id }
         }
       });
@@ -114,12 +121,12 @@ const resolvers = {
     }
   },
   Post: {
-    author: (root, args, context) => {
+    user: (root, args, context) => {
       return context.prisma
         .post({
           id: root.id
         })
-        .author();
+        .user();
     }
   }
 };

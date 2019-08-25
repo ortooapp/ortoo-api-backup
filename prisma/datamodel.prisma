@@ -14,5 +14,12 @@ type Post {
   updatedAt: DateTime! @updatedAt
   published: Boolean! @default(value: false)
   description: String!
-  author: User!
+  user: User!
+}
+
+type File {
+  filename: String!
+  mimetype: String!
+  encoding: String!
+  post: Post!
 }
