@@ -81,11 +81,11 @@ const resolvers = {
         user
       };
     },
-    createDraft: (root, args, context) => {
-      return context.prisma.createPost({
+    createDraft: (root, args, { user, prisma }) => {
+      return prisma.createPost({
         description: args.description,
         author: {
-          connect: { id: args.userId }
+          connect: { id: user.id }
         }
       });
     },
