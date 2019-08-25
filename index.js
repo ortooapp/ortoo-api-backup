@@ -34,6 +34,8 @@ const typeDefs = gql`
   }
 
   type Query {
+    posts: [Post!]!
+    draftedPosts: [Post!]!
     publishedPosts: [Post!]!
     post(postId: ID!): Post
     postsByUser(userId: ID!): [Post!]!
@@ -50,6 +52,12 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
+    posts: (root, args, context) => {
+      return context.prisma.posts();
+    },
+    draftedPosts: (root, args, context) => {
+      return context.prisma.posts({ where: { published: false } });
+    },
     publishedPosts: (root, args, context) => {
       return context.prisma.posts({ where: { published: true } });
     },
