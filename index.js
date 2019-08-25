@@ -116,14 +116,28 @@ const resolvers = {
   }
 };
 
+const getUser = token => {
+  try {
+    if (token) {
+      return jwt.verify(token, JWT_SECRET);
+    }
+    return null;
+  } catch (err) {
+    return null;
+  }
+};
+
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: true,
   playground: true,
   context: ({ req }) => {
-    const token = req.headers.authorization;
-    return { token, prisma };
+    const tokenWithBearer = req.headers.authorization || "";
+    const token = tokenWithBearer.split(" ")[1];
+    const user = getUser(token);
+
+    return { user, prisma };
   }
 });
 
