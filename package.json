@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/ortooapp/ortoo-api#readme",
   "dependencies": {
-    "apollo-server-micro": "^2.9.0",
+    "apollo-server-micro": "^2.14.2",
     "bcryptjs": "^2.4.3",
     "graphql": "^14.5.3",
     "jsonwebtoken": "^8.5.1",
